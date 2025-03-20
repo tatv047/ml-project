@@ -1,0 +1,88 @@
+1. Setup the github repository, clone the repo on your local machine.
+2. Create a new environment in the repository.
+3. Create requirements.txt. It'll have the name of all the packages I'll need while implementing the project.
+4. Create setup.py.
+    This module will be responsible for creating the ML application as a package like other python packages:seaborn etc.
+    And then you can deploy it in PyPI and then install these packages.
+    But how does setup.py finds out what all packages are there and all. 
+5.  So for that create a new folder "src" in the directory. But if you want "src" to be found out as 
+    a package, you need to create __init__.py files inside "src" folder.
+    So when setup.py is running, find_packages() will see taht in how many folders you have "__init__.py" file, and it'll
+    consider "src" as a package and then it'll try to build it. And after it is build, you can import it anywhere you want
+    in the directory like you import amy other package like seaborn,pandas etc.   
+6. Remember writing install_packages in setup.py but there can be hundred packages required, so we make a get_requirements()
+    function inside it to get the list from requirements.txt . 
+    Now you can run the setup.py files separately but if you'll do a small addition at the bottom in the requirements.txt
+    file, then at the time of when requirements.txt runs,setup.py will get automatically triggered and run.
+    Also,make sure to remove '-e .' from the requirements list coz you don't want that as a package name.
+    Now open a terminal and do : pip install -r requirements.txt 
+
+NOTE: I ran it and got this message: legacy editable install is deprecated. 
+The warning you received indicates that the legacy editable install method using setup.py develop is deprecated and will be removed in a future version of pip. 
+To address this, you can switch to using a pyproject.toml file, which is the modern way to specify build system requirements and configurations.
+So use a pyproject.toml file.
+```
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+```
+Keep the setup.py same but add this. And do install the project in editable mode.
+```
+pip install -e .
+```
+This command will use the pyproject.toml file to handle the build system requirements 
+and install the project in editable mode.
+But what is this '-e .' and editable install method?
+An editable install method allows you to install a Python package in such a way that 
+changes to the source code are immediately reflected without needing to reinstall the package.
+This is particularly useful during development, as it allows you to make changes to your code and test them right away.
+
+Legacy Editable Install Method
+The legacy way to perform an editable install was to use the setup.py develop command. 
+This method is now deprecated and will be removed in future versions of pip.
+
+Modern Editable Install Method
+The modern way to perform an editable install is to use the pyproject.toml file along with the pip install -e . command. 
+This method is compliant with PEP 517 and PEP 518, which define a standard way to specify build system requirements and configurations.
+
+
+Ques: But what does installing current project means? what is the location of this installation?
+
+Installing the current project means that the project is set up as a Python package that can be imported and
+used just like any other installed package. 
+When you install a project in editable mode using pip install -e ., it creates a link to the source code in your development environment.
+This allows you to make changes to the code and have those changes immediately reflected without needing to reinstall the package.
+
+-Location of Installation
+When you install a project in editable mode, pip creates a special file in your Python environment's site-packages directory that points to 
+the source code directory of your project. This way, the project is effectively "installed" but remains editable.
+
+Example
+Suppose your project directory is ml-project. When you run:
+```
+pip install -e .
+```
+pip will:
+>Create a link in the site-packages directory of your Python environment that points to ml-project.
+>This link allows you to import your project as a package in your Python code.
+
+-Importing the Installed Project
+After installing the project in editable mode, you can import it in your Python scripts.
+For example, if your project has a package named ml_project, you can do:
+```
+import ml_project
+```
+
+-Location of the Link
+The link created by pip install -e . is typically located in the site-packages directory of your Python environment. 
+The exact location depends on your environment setup. For example, if you are using a virtual environment, it might be located in:
+```
+<path_to_virtualenv>/Lib/site-packages
+```
+
+Summary
+Installing the current project: Sets up the project as a Python package that can be imported and used.
+Editable mode: Creates a link to the source code, allowing changes to be immediately reflected.
+Location: The link is created in the site-packages directory of your Python environment.
+By installing the project in editable mode, you can develop and test your code more efficiently, as changes are immediately available 
+without needing to reinstall the package.
