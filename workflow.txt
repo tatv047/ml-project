@@ -86,3 +86,12 @@ Editable mode: Creates a link to the source code, allowing changes to be immedia
 Location: The link is created in the site-packages directory of your Python environment.
 By installing the project in editable mode, you can develop and test your code more efficiently, as changes are immediately available 
 without needing to reinstall the package.
+
+7. Creata a subfolder components inside src and a module named __init__.py in it. Components are all the modules of a ML 
+pipeline like data_ingestion,data_transformation etc. You can create those files now.
+8. Create another folder named pipeline inside src and files like train_pipeline.py, there will be two types
+of pipelines: training and prediction.And from these two files I'll call modules from the componenest folder.
+9. Now create logger.py,exception.py and utils.py in the src folder.
+Logger logs,eception handles exception and utils stores funcationalities that can be used across the src in a common way,
+lets say you can create your mongoDB client here, etc.
+10. Now write the 
