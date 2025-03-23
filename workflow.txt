@@ -95,3 +95,54 @@ of pipelines: training and prediction.And from these two files I'll call modules
 Logger logs,eception handles exception and utils stores funcationalities that can be used across the src in a common way,
 lets say you can create your mongoDB client here, etc.
 10. Now write the 
+
+
+Let me break down these concepts for you:
+
+### Kernels and Virtual Environments
+
+A **kernel** in Jupyter is essentially the computational engine that runs and executes your code. It's the backend process that:
+- Interprets and executes the code you write in cells
+- Maintains the state of variables between cell executions
+- Handles all computation requests from your notebook
+
+A **virtual environment** is an isolated Python environment where you can install packages without affecting your system-wide Python installation.
+
+The **connection between them**: When you create a virtual environment, it has its own Python interpreter and packages. For Jupyter to use this environment, you need to make the virtual environment available as a kernel.
+
+### IPyKernel
+
+**IPyKernel** is the package that allows a Python environment to be used as a Jupyter kernel. When you try to use a virtual environment with Jupyter, you need to install ipykernel in that environment and register it so Jupyter knows about it.
+
+To make your virtual environment available as a kernel:
+```bash
+# Activate your virtual environment first
+pip install ipykernel
+python -m ipykernel install --user --name=myenv --display-name="Python (myenv)"
+```
+
+### Terminal Types
+
+These are different command-line interfaces:
+
+1. **CMD Prompt**: Windows' traditional command processor
+   
+2. **PowerShell**: Microsoft's more powerful shell with scripting capabilities
+   
+3. **Anaconda Prompt**: A specialized command prompt that automatically activates the base Anaconda environment
+   
+4. **Ubuntu/Linux Terminal**: The command-line interface for Ubuntu/Linux systems
+
+The terminal you use matters because:
+- They may have different commands and syntax
+- Environment variables are handled differently
+- Path separators vary (\ vs /)
+- Anaconda Prompt automatically configures itself for conda environments
+
+When working with virtual environments and Jupyter, you typically want to:
+1. Create and activate your virtual environment
+2. Install ipykernel in that environment
+3. Register the environment as a Jupyter kernel
+4. Select that kernel when running your notebook
+
+This way, your notebook runs with access to all the packages installed in your specific virtual environment.
