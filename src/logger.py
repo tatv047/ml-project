@@ -15,10 +15,6 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-# creating a logger object that can be imported by other modules
-logger = logging.getLogger(__name__)
-
-
 """For testing only"""
 
 # if __name__ == "__main__":

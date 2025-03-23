@@ -1,6 +1,6 @@
 import sys
 import logging  
-from logger import logger
+from src.logger import logging
 
 
 def error_message_details(error,error_detail:sys):
@@ -19,8 +19,7 @@ class CustomException(Exception):
     def __init__(self, error_message,error_detail:sys):
         super().__init__(error_message)
         self.error_message = error_message_details(error_message,error_detail=error_detail)
-        # logging the error
-        logger.error(self.error_message)
+        
 
     def __str__(self):
         return self.error_message
@@ -30,7 +29,7 @@ class CustomException(Exception):
 #     try:
 #         a=1/0
 #     except Exception as e:
-#         raise CustomException(e,sys)
+#         logging.error(CustomException(e,sys))
         
 
 
